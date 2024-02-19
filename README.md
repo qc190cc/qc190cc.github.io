@@ -6,5 +6,5 @@
 - 仓库根目录创建index.html
 ### 三、 Settings设置
 - git pages 的 Source 设置为 branch
-- Branch选择main, 然后save, 会开始部署项目
+- Branch选择main, 然后save, 会开始部署项目(同名库每次commit会自动部署项目)
 - Actions里可以查看部署情况以及重新部署项目
