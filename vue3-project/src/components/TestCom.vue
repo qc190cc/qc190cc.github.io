@@ -34,7 +34,10 @@
               </div>
             </el-popover>
           </div>
-          <img :src="img.src" style="opacity: 1; margin: 5px;" />
+          <img
+            :src="img.src"
+            class="img"
+            style="opacity: 1; margin: 5px; width: 200px; height: 150px; object-fit: contain; outline: 1px solid #ccc;" />
         </div>
       </template>
     </div>
@@ -639,7 +642,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .el-container {
   flex-direction: column;
 }

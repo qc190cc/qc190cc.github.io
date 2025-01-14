@@ -8,7 +8,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig(({ mode }) => {
   console.log('🚀 ~ mode:', mode)
   return {
-      base: mode === 'production' ? '/disttest' : '',
+      base: mode === 'production' ? '/dist' : '',
       plugins: [
       vue(),
       vueDevTools(),
