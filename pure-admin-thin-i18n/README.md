@@ -1,51 +1,24 @@
-<h1>vue-pure-admin精简版（国际化版本）</h1>
 
-[![license](https://img.shields.io/github/license/pure-admin/vue-pure-admin.svg)](LICENSE)
+## 视频识别
+#### 基于Vue3+Vite+Element-Plus+TypeScript（兼容移动端）
 
-**中文** | [English](./README.en-US.md)
+#### 简单说明
+目前只是精简后保留了核心代码,没有过多的修改框架的机制
+登录 / token / 信息存储 / 路由格式 等都是框架原生的,后面编写边改
 
-## 介绍
+#### 项目运行
+  配置建议: node: 22.12.0; pnpm: 9.15.4
+  1. 根目录 pnpm -i
+  2. 根目录 pnpm dev
 
-精简版是基于 [vue-pure-admin](https://github.com/pure-admin/vue-pure-admin) 提炼出的架子，包含主体功能，更适合实际项目开发，打包后的大小在全局引入 [element-plus](https://element-plus.org) 的情况下仍然低于 `2.3MB`，并且会永久同步完整版的代码。开启 `brotli` 压缩和 `cdn` 替换本地库模式后，打包大小低于 `350kb`
+#### 接口
+目前使用mock模拟
+登录信息: /mock/login.ts
+动态菜单参考: /mock/asyncRoutes.ts 下的 mattingRouter
+修改后不生效需重新 pnpm dev
 
-## 版本选择
-
-当前是国际化版本，如果您需要非国际化版本 [请点击](https://github.com/pure-admin/pure-admin-thin)
-
-## `js` 版本
-
-[点我查看 js 版本](https://pure-admin.cn/pages/js/)
-
-## `max` 版本
-
-[点我查看 max 版本](https://pure-admin.cn/pages/max/)
-
-## 配套视频
-
-[点我查看 UI 设计](https://www.bilibili.com/video/BV17g411T7rq)  
-[点我查看快速开发教程](https://www.bilibili.com/video/BV1kg411v7QT)
-
-## 配套保姆级文档
-
-[点我查看 vue-pure-admin 文档](https://pure-admin.cn/)  
-[点我查看 @pureadmin/utils 文档](https://pure-admin-utils.netlify.app)
-
-## 优质服务、软件外包、赞助支持
-
-[点我查看详情](https://pure-admin.cn/pages/service/)
-
-## 预览
-
-[查看预览](https://pure-admin-thin.netlify.app/#/login)
-
-## 维护者
-
-[xiaoxian521](https://github.com/xiaoxian521)
-
-## ⚠️ 注意
-
-精简版不接受任何 `issues` 和 `pr`，如果有问题请到完整版 [issues](https://github.com/pure-admin/vue-pure-admin/issues/new/choose) 去提，谢谢！
-
-## 许可证
-
-[MIT © 2020-present, pure-admin](./LICENSE)
+#### 目录结构
+  /mock - 模拟接口数据
+  /locales - 多语言配置
+  /src/ - vue那一套
+完整的目录结构见文档: https://pure-admin.cn/pages/directory/

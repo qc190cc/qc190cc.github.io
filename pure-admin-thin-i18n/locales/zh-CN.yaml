@@ -72,6 +72,8 @@ menus:
   purePermissionButton: 按钮权限
   purePermissionButtonRouter: 路由返回按钮权限
   purePermissionButtonLogin: 登录接口返回按钮权限
+  pureImg: 图片相关
+  pureMatting: 抠图
 status:
   pureLoad: 加载中...
   pureMessage: 消息

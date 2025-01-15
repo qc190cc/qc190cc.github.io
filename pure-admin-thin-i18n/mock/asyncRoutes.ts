@@ -55,6 +55,26 @@ const permissionRouter = {
   ]
 };
 
+const mattingRouter = {
+  path: "/img",
+  redirect: "/img/matting",
+  meta: {
+    icon: "ep:home-filled",
+    title: "menus.pureImg",
+    rank: 0
+  },
+  children: [
+    {
+      path: "/img/matting",
+      name: "matting",
+      component: "img/matting",
+      meta: {
+        title: "menus.pureMatting"
+      }
+    }
+  ]
+};
+
 export default defineFakeRoute([
   {
     url: "/get-async-routes",
@@ -62,7 +82,7 @@ export default defineFakeRoute([
     response: () => {
       return {
         success: true,
-        data: [permissionRouter]
+        data: [permissionRouter, mattingRouter]
       };
     }
   }
