@@ -5,10 +5,8 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) => {
-  console.log('🚀 ~ mode:', mode)
+export default defineConfig(() => {
   return {
-      base: mode === 'production' ? '/dist' : '',
       plugins: [
       vue(),
       vueDevTools(),
@@ -17,11 +15,6 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))
       },
-    },
-    build: {
-      emptyOutDir: true,
-      outDir: "../disttest",
-      minify: "esbuild"
     }
   }
 })

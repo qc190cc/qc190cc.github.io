@@ -3,20 +3,6 @@
     <div class="panel-body">
       <div class="demo">
         <canvas id="canvas" :width="width" :height="height"></canvas>
-        <div class="draw-btn-group">
-          <!-- <div :class="{active:drawType=='polygon'}" title="画多边形" @click="drawPolygon">
-            画多边形
-          </div> -->
-          <!-- <div :class="{active:drawType=='pen'}" title="笔画" @click="drawTypeChange('pen')">
-            笔画
-          </div>
-          <div @click="loadExpImg" title="加载背景图">
-            加载背景图
-          </div> -->
-          <!-- <div @click="save" title="保存">
-            <i class="draw-icon icon-save"></i>
-          </div> -->
-        </div>
       </div>
     </div>
     <div style="display: flex;">
@@ -41,11 +27,10 @@
         </div>
       </template>
     </div>
-
-    <input type="file" @change="uploadImgChange" id="imgInput" accept="image/*" />
-    <img id="img" :src="imgSrc" />
-    <img id="expImg" src="@/assets/t.png" />
-    <img src="https://qntest.mydadui.com/bac/upload/202501/qiniu_20250114174242ee4d362.png" />
+    <div>
+      <img id="expImg" src="@/assets/t.png" />
+      <img src="https://qntest.mydadui.com/bac/upload/202501/qiniu_20250114174242ee4d362.png" />
+    </div>
   </div>
 </template>
 <script>
@@ -58,16 +43,13 @@ export default {
       height: 507,
       rect: [],
       canvas: {},
-      showMenu: false,
       x: "",
       y: "",
 
       mouseFrom: {},
       mouseTo: {},
       drawType: null,  //当前绘制图像的种类
-      canvasObjectIndex: 0,
       textbox: null,
-      rectangleLabel: "warning",
       drawWidth: 2, //笔触宽度
       color: "#E34F51", //画笔颜色
       drawingObject: null, //当前绘制对象
@@ -81,10 +63,6 @@ export default {
       activeShape: false,
       activeLine: "",
       line: {},
-
-      delectKlass: {},
-      imgFile: {},
-      imgSrc: "",
 
       imgs: []
     };
@@ -101,12 +79,6 @@ export default {
     },
   },
   methods: {
-    getT(img) {
-      console.log('🚀 ~ img:', img)
-      return ` x: ${img.x}, y: ${img.y};
-点位: ${JSON.stringify(img.points)};
-      `
-    },
     // 保存当前画布为png图片
     save() {
       var canvas = document.getElementById('canvas')
@@ -132,45 +104,11 @@ export default {
     // 从已渲染的DOM元素加载图片至canvas
     loadExpImg() {
       var imgElement = document.getElementById("expImg"); //声明我们的图片
-      console.log('🚀 ~ imgElement:', imgElement)
       var imgInstance = new fabric.Image(imgElement, {
         selectable: false
         // zIndex:-99,
       });
       this.canvas.add(imgInstance);
-    },
-    // 从文件加载图片至canvas
-    uploadImgChange() {
-      // 获取文件
-      var eleImportInput = document.getElementById("imgInput");
-      this.imgFile = eleImportInput.files[0];
-      var imgSrc = "",
-        imgTitle = "";
-      // 从reader中获取选择文件的src
-      if (/\.(jpe?g|png|gif)$/i.test(this.imgFile.name)) {
-        var reader = new FileReader();
-        var _this = this;
-        reader.addEventListener(
-          "load",
-          function () {
-            imgTitle = _this.imgFile.name;
-            _this.imgSrc = this.result;
-          },
-          false
-        );
-        reader.readAsDataURL(this.imgFile);
-      }
-      var imgElement = document.getElementById("img"); //声明我们的图片
-
-      imgElement.onload = () => {
-        this.width = imgElement.width
-        this.height = imgElement.height
-        var imgInstance = new fabric.Image(imgElement, {
-          zIndex: -1,
-          selectable: false
-        });
-        this.canvas.add(imgInstance);
-      };
     },
     // 开始绘制时，指定绘画种类
     drawTypeChange(e) {
@@ -390,7 +328,7 @@ export default {
         });
         this.canvas.remove(point);
       });
-      this.lineArray.map((line, index) => {
+      this.lineArray.map((line) => {
         this.canvas.remove(line);
       });
       this.canvas.remove(this.activeShape)
@@ -406,11 +344,9 @@ export default {
 
       // 背景图片地址
       // 实例化多边形
-      // img.src = './t.png';
       fabric.util.loadImage('https://qntest.mydadui.com/bac/upload/202501/qiniu_20250114174242ee4d362.png', {
         crossOrigin: true
       }).then(img => {
-          console.log('🚀 ~ img:', img)
           // 计算缩放比例
           // 将画布canvas添加到pattern中
           const pattern = new fabric.Pattern({
@@ -420,11 +356,7 @@ export default {
           })
           // 设置多边形为图案填充
           polygon.set('fill', pattern);
-          // this.canvas.add(polygon);
 
-         console.log('🚀 ~ polygon.top:', polygon.top)
-         console.log('🚀 ~ polygon.left:', polygon.left)
-         console.log('🚀 ~ polygon.top:', polygon.top)
          const u = polygon.toDataURL()
          this.imgs.push({
           src: u,
@@ -642,7 +574,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .el-container {
   flex-direction: column;
 }
