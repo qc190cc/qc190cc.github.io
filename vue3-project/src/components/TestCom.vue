@@ -320,6 +320,7 @@ export default {
       this.canvas.add(circle);
     },
     generatePolygon() {
+      console.log('🚀 ~ generatePolygon:')
       var points = new Array();
       this.pointArray.map((point, index) => {
         points.push({
