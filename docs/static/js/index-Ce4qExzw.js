@@ -1,1 +1,0 @@
-import e from"./SpinWheel-CYR8pocX.js";import{d as o,c as t,o as n,b as r}from"./index-D0vIKclC.js";import"./el-input-Cr4vZ34z.js";import"./index-B0nHmeuB.js";const _=o({name:"Welcome",__name:"index",setup(a){return(m,c)=>(n(),t("div",null,[r(e)]))}});export{_ as default};
