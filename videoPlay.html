@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <title>视频</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    #player {
+      width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div style="height: 100vh; display: flex; align-items: center;">
+    <!-- 把 src 换成你自己的视频地址（相对路径或 https 绝对地址均可） -->
+    <video id="player"
+          src=""
+          preload="auto"
+          muted
+          loop
+          playsinline
+          webkit-playsinline
+          controls
+          x5-playsinline="true"
+          x5-video-player-type="h5"
+          x5-video-orientation="portrait"
+        >
+    </video>
+  </div>
+
+  <script>
+    (function () {
+      var video = document.getElementById('player');
+      var played = false;
+
+      // 取页面地址（例: www.test.com?urlIndex=1）上的 urlIndex，兼容参数挂在 # 后面的写法；缺失或越界时回退到下标 0
+      function getUrl() {
+        // 视频地址列表，下标与页面地址上的 urlIndex 一一对应
+        var srcList = [
+          'https://lf3-static.bytednsdoc.com/obj/eden-cn/nupenuvpxnuvo/xgplayer_doc/xgplayer-demo.mp4',
+          'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+          'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4',
+        ];
+        var search = window.location.search || '';
+        var hash = window.location.hash || '';
+        var matched = search.match(/[?&]order=([^&#]*)/) || hash.match(/[?&]order=([^&#]*)/);
+        var index = (matched ? parseInt(matched[1]) : 0) - 1;
+        return srcList[index];
+      }
+
+      function tryPlay() {
+        if (played) return;
+        var url = getUrl();
+        console.log('url: ', url)
+        if (!url)return alert('参数异常');
+        video.src = url;
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+      }
+
+      function onStarted() {
+        played = true;
+      }
+      video.addEventListener('playing', onStarted);
+
+      // 微信内置浏览器：等待 JSBridge 就绪后尝试自动播放
+      function WeixinJSBridgeReady() {
+        tryPlay();
+      }
+      if (typeof WeixinJSBridge !== 'undefined') {
+        WeixinJSBridgeReady();
+      } else {
+        document.addEventListener('WeixinJSBridgeReady', WeixinJSBridgeReady, false);
+      }
+
+      // 部分机型（尤其 iOS）必须有一次用户手势才能播放，首次触摸时再尝试
+      document.addEventListener('touchstart', function once() {
+        video.muted = false; // 用户首次触摸后恢复声音；若希望一直静音可删掉这行
+        tryPlay();
+        document.removeEventListener('touchstart', once);
+      }, { passive: true });
+
+      // 兜底尝试
+      tryPlay();
+    })();
+  </script>
+</body>
+</html>
