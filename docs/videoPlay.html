@@ -112,9 +112,10 @@
       /* ---- 来源判定：是否由短链入口页 n3u6eipb82.html 跳转过来 ----
          两页同源，location.replace 跳转不会丢 referrer，默认 Referrer-Policy 下同导航能拿到完整路径；
          只比对文件名，避开 /docs 子目录、http/https、端口等环境差异 */
-      console.log('window.location.referrer', window.location.referrer)
-      var fromEntry = (document.referrer || '').indexOf('n3u6eipb82.html') > -1;
-      console.log('fromEntry', fromEntry)
+      console.log('document.referrer', document.referrer)
+      var isForm = (document.referrer || '').indexOf(window.location.origin + '/n3u6eipb82.html') === 0;
+      console.log('isForm', isForm)
+      if (!isForm) return alert('请重新扫码');
 
       var video = document.getElementById('player');
       var played = false;
