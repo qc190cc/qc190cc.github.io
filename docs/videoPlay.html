@@ -109,10 +109,16 @@
 
   <script>
     (function () {
+      /* ---- 来源判定：是否由短链入口页 n3u6eipb82.html 跳转过来 ----
+         两页同源，location.replace 跳转不会丢 referrer，默认 Referrer-Policy 下同导航能拿到完整路径；
+         只比对文件名，避开 /docs 子目录、http/https、端口等环境差异 */
+      console.log('window.location.referrer', window.location.referrer)
+      var fromEntry = (document.referrer || '').indexOf('n3u6eipb82.html') > -1;
+      console.log('fromEntry', fromEntry)
+
       var video = document.getElementById('player');
       var played = false;
 
-      // 取页面地址（例: www.test.com?urlIndex=1）上的 urlIndex，兼容参数挂在 # 后面的写法；缺失或越界时回退到下标 0
       function getUrl() {
         // 视频地址列表，下标与页面地址上的 urlIndex 一一对应
         var srcList = [

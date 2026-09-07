@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <title>跳转中</title>
+
+  <!-- 进入页面立即跳转：同步脚本放在 head 最前面，早于 body 渲染，避免闪现空白页 -->
+  <script>
+    (function () {
+      // 透传 query，videoPlay.html 依赖 order 参数选择视频源
+      // 用 replace 不留历史记录，否则用户点返回会跳回本页再跳走，形成往返死循环
+      window.location.replace('videoPlay.html' + (window.location.search || ''));
+    })();
+  </script>
+</head>
+<body>
+</body>
+</html>
