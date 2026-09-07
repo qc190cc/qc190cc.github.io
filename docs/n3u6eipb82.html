@@ -9,9 +9,10 @@
   <!-- 进入页面立即跳转：同步脚本放在 head 最前面，早于 body 渲染，避免闪现空白页 -->
   <script>
     (function () {
-      // 透传 query，videoPlay.html 依赖 order 参数选择视频源
+      // 透传 query 与 hash，videoPlay.html 依赖 order 参数选择视频源
       // 用 replace 不留历史记录，否则用户点返回会跳回本页再跳走，形成往返死循环
-      window.location.replace('https://i.mydadui.com/msg/videoPlay?order=1');
+      const newUrl = window.location.href.replace('n3u6eipb82', 'videoPlay');
+      window.location.replace(newUrl);
     })();
   </script>
 </head>

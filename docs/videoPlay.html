@@ -109,11 +109,12 @@
 
   <script>
     (function () {
-      /* ---- 来源判定：是否由短链入口页 n3u6eipb82.html 跳转过来 ----
+      /* ---- 来源判定：是否由短链入口页 n3u6eipb82 跳转过来 ----
          两页同源，location.replace 跳转不会丢 referrer，默认 Referrer-Policy 下同导航能拿到完整路径；
         */
       console.log('document.referrer', document.referrer)
-      var isForm = (document.referrer || '').indexOf(window.location.origin + '/n3u6eipb82.html') === 0;
+      console.log('window.location.href', window.location.href)
+      var isForm = (document.referrer || '') == window.location.href.replace('videoPlay', 'n3u6eipb82');
       console.log('isForm', isForm)
       if (!isForm) return alert('请重新扫码');
 
